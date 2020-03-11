@@ -35,11 +35,9 @@
       <table class="table table-bordered table-responsive-md table-striped text-center">
         <thead>
           <tr>
+            <th class="text-center">Año</th>
             <th class="text-center">Materia</th>
-            <th class="text-center">Descripcion</th>
-            <th class="text-center">Nota</th>
             <th class="text-center">Estado</th>
-            <th class="text-center">Inscripto</th>
           </tr>
         </thead>
         <tbody>
@@ -49,11 +47,9 @@
 				{
 			%>
           <tr>
+            <td class="pt-3-half"><%=insCu.getFechainscripcion().getYear()+1900%></td>  
             <td class="pt-3-half"><%=insCu.getCurso().getNombre()%></td>
-            <td class="pt-3-half"><%=insCu.getCurso().getDescripcion()%></td>
             <td class="pt-3-half"><%=insCu.getNota() %></td>
-            <td class="pt-3-half"><%=insCu.getEstado()%></td>
-            <td class="pt-3-half"><%=insCu.getFechainscripcion()%></td>  
           </tr><%}}%>
         </tbody>
       </table>

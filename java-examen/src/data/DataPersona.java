@@ -2,6 +2,7 @@ package data;
 
 import java.sql.*;
 import entidades.*;
+import entidades.Persona.TipoDocumento;
 
 public class DataPersona {
 
@@ -59,5 +60,43 @@ public class DataPersona {
 				e.printStackTrace();} 	
 				}
 		}
+	
+	public Docente getDocenteById(int ID){
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		Docente docente=null;
+		try {
+			stmt= Conectar.getInstancia().getConn().
+					prepareStatement("select doc.identificador,pe.identificador,legajo, tipodoc, documento,nombre,apellido,fechanac from docente doc"
+							+ " inner join persona pe on doc.idpersona=pe.identificador where doc.identificador=?");
+				
+				stmt.setInt(1,ID);
+				rs=stmt.executeQuery();
+			if(rs!=null && rs.next()) {
+					docente=new Docente();
+					docente.setApellido(rs.getString(7));
+					docente.setNombre(rs.getString(6));
+					docente.setFechanacimiento(rs.getDate(8));
+					docente.setIdentificador(rs.getInt(1));
+					docente.setIdentificadorP(rs.getInt(2));
+					docente.setLegajo(rs.getInt(3));
+					docente.setNumerodocumento(rs.getInt(5));
+					String tipodoc=rs.getString(4);
+					docente.setTipodocumento(TipoDocumento.valueOf(tipodoc.replace(" ","").toLowerCase()));
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				Conectar.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}	
+		return docente;
+	}
 	
 }

@@ -26,6 +26,7 @@ public class DataCurso {
 					c.setDescripcion(rs.getString("descripcion"));
 					c.setAnio(rs.getInt("anio"));
 					c.setIdcarrera(rs.getInt("idcarrera"));
+					c.setIddocente(rs.getInt("iddocente"));
 					cursos.add(c);
 				}
 			}			
@@ -59,6 +60,7 @@ public class DataCurso {
 					c.setIdentificador(rs.getInt("identificador"));
 					c.setNombre(rs.getString("nombre"));
 					c.setIdcarrera(rs.getInt("idcarrera"));
+					c.setIddocente(rs.getInt("iddocente"));
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -89,8 +91,7 @@ public class DataCurso {
 					ic.setFechainscripcion(rs.getDate("fechainscripcion"));
 					ic.setCurso(this.getById(rs.getInt("idcurso")));
 					ic.setAlumno(da.getById(rs.getInt("idalumno")));
-					ic.setNota(rs.getDouble("nota"));
-					ic.setEstado(rs.getString("estado"));
+					ic.setNota(rs.getDouble("nota"));;
 					insc_cursos.add(ic);
 				}
 			}			
@@ -125,6 +126,7 @@ public class DataCurso {
 					c.setDescripcion(rs.getString("descripcion"));
 					c.setAnio(rs.getInt("anio"));
 					c.setIdcarrera(rs.getInt("idcarrera"));
+					c.setIddocente(rs.getInt("iddocente"));
 					cursos.add(c);
 				}
 			}			
