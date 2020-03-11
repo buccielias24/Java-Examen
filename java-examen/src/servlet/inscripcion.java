@@ -38,10 +38,17 @@ public class inscripcion extends HttpServlet {
 		ControladorPersona cp=new ControladorPersona();
 		HttpSession session=request.getSession(false);
 		Alumno a=(Alumno)session.getAttribute("user");
-		System.out.println(a);
-		cp.addCurso(ID,a);
-		RequestDispatcher rd=request.getRequestDispatcher("index.html");
-		rd.forward(request,response);
+		if(cp.addCurso(ID,a)) {
+		response.setContentType("text/plain");
+		response.getWriter().write("Inscripto");
+		//RequestDispatcher rd=request.getRequestDispatcher("index.html");
+		//rd.forward(request,response);
+		}
+		else {
+			response.setContentType("text/plain");
+			response.getWriter().write("no hay cupo");}
+		//	RequestDispatcher rd=request.getRequestDispatcher("error.jsp");
+	//	rd.forward(request,response);}
 	}
 
 	/**

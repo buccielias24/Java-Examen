@@ -7,6 +7,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  
 
 <meta charset="ISO-8859-1">
 <title>Inscripciones</title>
@@ -49,7 +53,7 @@
             <td class="pt-3-half"><%=c.getDescripcion()%></td>
              <td>
         <div class="display_table center">
-          <a href="/java-examen/inscripcion?id=<%=c.getIdentificador()%>">inscribirse</a>
+          <a id="button" href="/java-examen/inscripcion?id=<%=c.getIdentificador()%>">inscribirse</a>
         </div>
       </td>
           </tr><%}}%>

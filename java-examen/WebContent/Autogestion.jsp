@@ -21,7 +21,6 @@
 			ArrayList<InscripcionCarrera> inscripcionesCarrera=(ArrayList<InscripcionCarrera>)request.getAttribute("carreras");
 			ArrayList<InscripcionCurso> inscripcionesCurso=(ArrayList<InscripcionCurso>)request.getAttribute("cursos");
 			Alumno a=(Alumno)session.getAttribute("user");
-			System.out.println(a);
 			ControladorPersona cp=new ControladorPersona();
 			for(InscripcionCarrera ic:inscripcionesCarrera)
 			{

@@ -2,7 +2,6 @@ package logic;
 import java.util.ArrayList;
 import data.*;
 import entidades.*;
-import entidades.Persona.TipoDocumento;
 public class ControladorPersona {
 
 	private DataPersona dp;
@@ -71,9 +70,13 @@ public class ControladorPersona {
 			return dcu.getDisponibles(ID);
 	}
 	
-	public void addCurso(int ID, Alumno a)
+	public boolean addCurso(int ID, Alumno a)
 	{	
-		dcu.addInscripcion(dcu.getById(ID),a);
+		if(this.validarInscripcion(dcu.getById(ID)))
+		{
+			dcu.addInscripcion(dcu.getById(ID),a);
+			return true;
+		}else return false;
 	}
 	
 	
@@ -132,7 +135,24 @@ public class ControladorPersona {
 				validar=false;
 			}
 		}
-		System.out.println(validar);
+		return validar;
+	}
+	
+	public boolean validarInscripcion(Curso c)
+	{
+		boolean validar=true;
+		int total=0;
+		for(InscripcionCurso ins_c:dcu.getInscripciones())			
+		{
+			if(ins_c.getCurso().getIdentificador()==c.getIdentificador())
+			{
+				total++;
+			}
+		}
+		if (c.getCupomaximo()<=total)
+		{
+			validar=false;
+		}
 		return validar;
 	}
 }
