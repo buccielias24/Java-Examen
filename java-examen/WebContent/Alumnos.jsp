@@ -144,6 +144,9 @@ $(document).ready(function(){
 </div>
 <!-- Editable table -->
  
+<!-- Button trigger modal -->
+<button type="button" id="trigger_modal" class="thehide btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
+</button>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
