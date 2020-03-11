@@ -56,8 +56,14 @@ public class registroalumno extends HttpServlet {
 			e.printStackTrace();
 		}  
 		Alumno a=new Alumno(tipodoc,documento,nombre,apellido,fechanac);
-		ctrl.add(a);
-		response.sendRedirect("Alumnos.jsp");
-	}
+		if(ctrl.add(a))
+		{
+			response.setContentType("text/plain");
+			response.getWriter().write("Agregado");
+		}else {
+			response.setContentType("text/plain");
+			response.getWriter().write("Alumno Duplicado");
+		}
+		}
 
 }

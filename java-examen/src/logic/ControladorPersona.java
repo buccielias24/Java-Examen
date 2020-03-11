@@ -2,6 +2,7 @@ package logic;
 import java.util.ArrayList;
 import data.*;
 import entidades.*;
+import entidades.Persona.TipoDocumento;
 public class ControladorPersona {
 
 	private DataPersona dp;
@@ -16,9 +17,12 @@ public class ControladorPersona {
 		dcu=new DataCurso();
 	}
 	
-	public void add(Alumno a)
+	public boolean add(Alumno a)
 	{
-		dp.add(a);
+		if(this.validarNuevoAlumno(a))
+			{dp.add(a);
+			return true;
+			}else {return false;}
 	}
 	
 	public Alumno getById(int ID)
@@ -116,5 +120,19 @@ public class ControladorPersona {
 						}
 				}
 			return total/contador;
+	}
+	
+	public boolean validarNuevoAlumno(Alumno a)
+	{
+		boolean validar=true;
+		for(Alumno alum:da.getAll())
+		{
+			if(alum.getNumerodocumento()==a.getNumerodocumento()&&alum.getTipodocumento()==a.getTipodocumento())
+			{
+				validar=false;
+			}
+		}
+		System.out.println(validar);
+		return validar;
 	}
 }

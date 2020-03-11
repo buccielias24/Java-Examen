@@ -18,13 +18,12 @@
 		$(document).on("submit", "#myform", function(event) {
 		    var $form = $(this);
 
-		    $.post($form.attr("action"), $form.serialize(), function(response) {
-		        // ..
+		    $.post($form.attr("action"), $form.serialize(), function(responseText) {
+		        alert(responseText);
 		    });
 		    event.preventDefault(); // Important! Prevents submitting the form.
-		    alert("Creado");
-		    $(this).close;
-	        
+		   // alert("Creado");
+		    
 		});
 		</script>
 		
@@ -52,7 +51,7 @@ $(document).ready(function(){
 </head>
 <body>
 <div class="container">
-  <h1 class="card-header text-center font-weight-bold text-uppercase py-4">Alumnos</h1>
+  <h1 class="card-header text-center font-weight-bold text-uppercase py-4">Listado</h1>
   
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -96,9 +95,9 @@ $(document).ready(function(){
     </div>
   </div>
   
-  <!-- Editable table -->
+  <!-- Table -->
 <div class="card">
-  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Editable table</h3>
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Alumnos</h3>
   <!-- Trigger the modal with a button -->
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">+</button>
   
@@ -145,10 +144,6 @@ $(document).ready(function(){
 </div>
 <!-- Editable table -->
  
-<!-- Button trigger modal -->
-<button type="button" id="trigger_modal" class="thehide btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
-  Launch demo modal
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
