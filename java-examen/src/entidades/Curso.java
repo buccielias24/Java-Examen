@@ -8,6 +8,7 @@ public class Curso {
 		private int cupomaximo;
 		private int anio;
 		private int idcarrera;
+		private int iddocente;
 		
 		public Curso() {
 			super();
@@ -44,12 +45,6 @@ public class Curso {
 			this.anio = anio;
 		}
 
-		@Override
-		public String toString() {
-			return "Curso [identificador=" + identificador + ", nombre=" + nombre + ", descripcion=" + descripcion
-					+ ", cupomaximo=" + cupomaximo + ", anio=" + anio + "]";
-		}
-
 		public int getIdcarrera() {
 			return idcarrera;
 		}
@@ -58,28 +53,12 @@ public class Curso {
 			this.idcarrera = idcarrera;
 		}
 
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + anio;
-			result = prime * result + identificador;
-			return result;
+
+		public int getIddocente() {
+			return iddocente;
 		}
 
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			Curso other = (Curso) obj;
-			if (anio != other.anio)
-				return false;
-			if (identificador != other.identificador)
-				return false;
-			return true;
+		public void setIddocente(int iddocente) {
+			this.iddocente = iddocente;
 		}
 }

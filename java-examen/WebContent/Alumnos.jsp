@@ -37,7 +37,6 @@ $(document).ready(function(){
 	    $("#myModal2 .modal-body").html($("#partial_container").html());
 	    $('#myModal2 input[name="apellido"]').val($(this).closest("tr").find("td:nth-child(1)").text());
 	    $('#myModal2 input[name="nombre"]').val($(this).closest("tr").find("td:nth-child(2)").text());
-	    $('#myModal2 input[name="legajo"]').val($(this).closest("tr").find("td:nth-child(3)").text());
 	    $('#myModal2 input[name="tipodoc"]').val($(this).closest("tr").find("td:nth-child(4)").text());    
 	    $('#myModal2 input[name="nrodoc"]').val($(this).closest("tr").find("td:nth-child(5)").text()); 
 	    $('#myModal2 input[name="fechanac"]').val($(this).closest("tr").find("td:nth-child(6)").text()); 
@@ -47,6 +46,19 @@ $(document).ready(function(){
 	});
 	
 </script>
+
+<script type="text/javascript">
+		$(document).on("submit", "#myform2", function(event) {
+		    var $form = $(this);
+
+		    $.post($form.attr("action"), $form.serialize(), function(responseText) {
+		        alert(responseText);
+		    });
+		    event.preventDefault(); // Important! Prevents submitting the form.
+		   // alert("Creado");
+		    
+		});
+		</script>
 
 </head>
 <body>
@@ -67,7 +79,6 @@ $(document).ready(function(){
 <div class="form">
   	<form id="myform" action="/java-examen/registroalumno" method="post">
   		<div class="container">
-    		<hr>
     			<label><b>Nombre</b></label>
   			    <input type="text" placeholder="Ingrese nombre" name="nombre" required>
 				<label><b>Apellido</b></label>
@@ -169,7 +180,7 @@ $(document).ready(function(){
 <!-- the partial container -->
 
 <div class="thehide" id="partial_container">
-  <form action="/java-examen/editaralumno" method="post">
+  <form id="myform2" action="/java-examen/editaralumno" method="post">
     <fieldset>
       <div class="container-fluid">
         <div class="row">
@@ -183,12 +194,6 @@ $(document).ready(function(){
             <div class="form-group">
               <label>NOMBRE:</label>
               <input type="text" name="nombre" class="form-control" />
-            </div>
-          </div>
-          <div class="col-sm-12">
-            <div class="form-group">
-              <label>LEGAJO:</label>
-              <input type="text" name="legajo" class="form-control" />
             </div>
           </div>
           <div class="col-sm-12">

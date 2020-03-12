@@ -8,7 +8,6 @@ public class InscripcionCurso {
 	private Curso curso;
 	private Date fechainscripcion;
 	private double nota;
-	private String estado;
 	
 	public InscripcionCurso() {}
 	
@@ -46,13 +45,5 @@ public class InscripcionCurso {
 	public void setNota(double nota) {
 		this.nota = nota;
 	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	} 
 	
 }

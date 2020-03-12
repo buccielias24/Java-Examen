@@ -26,6 +26,7 @@ public class DataCurso {
 					c.setDescripcion(rs.getString("descripcion"));
 					c.setAnio(rs.getInt("anio"));
 					c.setIdcarrera(rs.getInt("idcarrera"));
+					c.setIddocente(rs.getInt("iddocente"));
 					cursos.add(c);
 				}
 			}			
@@ -59,6 +60,7 @@ public class DataCurso {
 					c.setIdentificador(rs.getInt("identificador"));
 					c.setNombre(rs.getString("nombre"));
 					c.setIdcarrera(rs.getInt("idcarrera"));
+					c.setIddocente(rs.getInt("iddocente"));
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -89,8 +91,7 @@ public class DataCurso {
 					ic.setFechainscripcion(rs.getDate("fechainscripcion"));
 					ic.setCurso(this.getById(rs.getInt("idcurso")));
 					ic.setAlumno(da.getById(rs.getInt("idalumno")));
-					ic.setNota(rs.getDouble("nota"));
-					ic.setEstado(rs.getString("estado"));
+					ic.setNota(rs.getDouble("nota"));;
 					insc_cursos.add(ic);
 				}
 			}			
@@ -113,7 +114,8 @@ public class DataCurso {
 		ArrayList<Curso> cursos= new ArrayList<>();		
 		try {
 			stmt= Conectar.getInstancia().getConn().
-					prepareStatement("select * from curso where identificador not in (select idcurso from inscripciones_curso where idalumno=?)");
+					prepareStatement("select * from curso where identificador not in (select idcurso from inscripciones_curso where idalumno=? and nota>6)" + 
+							"and curso.anio=(SELECT extract( year FROM CURRENT_DATE )::int)");
 				stmt.setInt(1,ID);
 				rs=stmt.executeQuery();
 			if(rs!=null) {
@@ -125,6 +127,7 @@ public class DataCurso {
 					c.setDescripcion(rs.getString("descripcion"));
 					c.setAnio(rs.getInt("anio"));
 					c.setIdcarrera(rs.getInt("idcarrera"));
+					c.setIddocente(rs.getInt("iddocente"));
 					cursos.add(c);
 				}
 			}			

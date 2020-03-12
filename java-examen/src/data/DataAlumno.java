@@ -18,7 +18,7 @@ public class DataAlumno {
 			
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into alumno(idpersona) values(?)",
+							"insert into alumno(idpersona,legajo) values(?,(select max(legajo)+1 from alumno))",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, a.getIdentificadorP());
 			stmt.executeUpdate();	
