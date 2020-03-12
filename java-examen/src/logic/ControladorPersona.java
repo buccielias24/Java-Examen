@@ -29,10 +29,29 @@ public class ControladorPersona {
 		return da.getById(ID);
 	}
 	
-	public void edit(Alumno a)
+	public boolean edit(Alumno a)
 	{
-		dp.editar(a);
-		da.editar(a);
+		boolean igual=false;
+		for(Alumno alumnos:da.getAll())
+		{
+			if(alumnos.getIdentificador()!=a.getIdentificador())
+			{
+				if(alumnos.getNumerodocumento()==a.getNumerodocumento() || alumnos.getLegajo()==a.getLegajo())
+				{
+					igual=true;
+					break;
+				}
+			}
+		}
+		if(igual==false)
+		{	dp.editar(a);
+			da.editar(a);
+			return true;
+		}
+		else
+		{
+		return false;
+		}
 	}
 	
 	
@@ -65,11 +84,7 @@ public class ControladorPersona {
 		return a;
 	}
 
-	public ArrayList<Curso> getCursosDisponibles(int ID)
-	{
-			return dcu.getDisponibles(ID);
-	}
-	
+
 	public boolean addCurso(int ID, Alumno a)
 	{	
 		if(this.validarInscripcion(dcu.getById(ID)))
@@ -136,6 +151,11 @@ public class ControladorPersona {
 			}
 		}
 		return validar;
+	}
+	
+	public ArrayList<Curso> getCursosDisponibles(int ID)
+	{
+		return dcu.getDisponibles(ID);
 	}
 	
 	public boolean validarInscripcion(Curso c)

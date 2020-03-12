@@ -46,7 +46,6 @@ public class editaralumno extends HttpServlet {
 		ControladorPersona ctrl=new ControladorPersona();
 		String nombre=request.getParameter("nombre");
 		String apellido=request.getParameter("apellido");
-		int legajo=Integer.parseInt(request.getParameter("legajo"));
 		TipoDocumento tipodoc=TipoDocumento.valueOf(request.getParameter("tipodoc"));
 		int numdoc=Integer.parseInt(request.getParameter("nrodoc"));
 		Date fechanac=null;
@@ -61,13 +60,19 @@ public class editaralumno extends HttpServlet {
 		a=ctrl.getById(id);
 		a.setNombre(nombre);
 		a.setApellido(apellido);
-		a.setLegajo(legajo);
 		a.setIdentificador(id);
 		a.setTipodocumento(tipodoc);
 		a.setNumerodocumento(numdoc);
 		a.setFechanacimiento(fechanac);
-		ctrl.edit(a);
-		response.sendRedirect("/java-examen/Alumnos.jsp");
+		if(ctrl.edit(a))
+		{
+			response.setContentType("text/plain");
+			response.getWriter().write("Editado");	
+		} else 
+		{
+			response.setContentType("text/plain");
+			response.getWriter().write("Datos duplicados por favor chequear");
+		}
 	}
 
 }
