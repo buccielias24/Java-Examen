@@ -42,7 +42,7 @@
             <td class="pt-3-half"><%=c.getDescripcion()%></td>
             <td class="pt-3-half"><%=c.getCupomaximo()%></td>
             <td class="pt-3-half"><%=c.getAnio()%></td>  	
-            <td class="pt-3-half"><%=dp.getDocenteById(c.getIddocente())%></td>
+            <td class="pt-3-half"><%=dp.getDocenteById(c.getIddocente()).getApellido()%></td>
            <td>
         <div class="display_table center">
           <a href="/java-examen/inscripcionescursos?id=<%=c.getIdentificador()%>">Ver</a>

@@ -114,7 +114,8 @@ public class DataCurso {
 		ArrayList<Curso> cursos= new ArrayList<>();		
 		try {
 			stmt= Conectar.getInstancia().getConn().
-					prepareStatement("select * from curso where identificador not in (select idcurso from inscripciones_curso where idalumno=?)");
+					prepareStatement("select * from curso where identificador not in (select idcurso from inscripciones_curso where idalumno=? and nota>6)" + 
+							"and curso.anio=(SELECT extract( year FROM CURRENT_DATE )::int)");
 				stmt.setInt(1,ID);
 				rs=stmt.executeQuery();
 			if(rs!=null) {
