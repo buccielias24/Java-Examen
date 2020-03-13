@@ -178,7 +178,6 @@ public class ControladorPersona {
 				validar=true;
 			}
 		}
-		System.out.println("Validar general: "+validar);
 		return validar;
 	}
 	
@@ -189,16 +188,12 @@ public class ControladorPersona {
 		
 		for(InscripcionCurso ins_c:dcu.getInscripcionesAlumno(a.getIdentificador()))
 		{
-				System.out.println("comparacion de fechas"+ins_c.getFechainscripcion().getYear()+ahora.getYear());
-				
 				if(ins_c.getCurso().getIdentificador()==c.getIdentificador() && ins_c.getFechainscripcion().getYear()==ahora.getYear())
 				{
 					
 					validar=false;
 				}
 		}
-		
-		System.out.println("validarInscripcion (FECHAS) retorna: "+validar);
 		return validar;
 	}
 	
@@ -235,7 +230,6 @@ public class ControladorPersona {
 		{
 			validar=false;
 		}
-		System.out.println("validarCupo retorna :"+validar);
 		return validar;
 	}
 }
