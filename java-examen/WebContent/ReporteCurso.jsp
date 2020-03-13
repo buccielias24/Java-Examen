@@ -6,11 +6,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="ISO-8859-1">
+<title>Cursos</title>
+<link rel="stylesheet" href="css/estilo.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+  <link rel="stylesheet" href="css/estilo.css">
+	
 <style type="text/css">
 p.p2 {
   position: relative;
@@ -19,25 +23,28 @@ p.p2 {
 p.p1{
   position:relative;
   left:200px;
-}
+body{
+font-family: 'Roboto';font-size: 50px;
+  }
 </style>
-
 </head>
 <body>
 <% 
 	Curso curso=(Curso)request.getAttribute("detallecurso");
 %>
 <div class="container">
-  <h2>REPORTE DEL CURSO : <%=curso.getNombre()%></h2>
-  <h3><%=curso.getDescripcion()%></h3>	
-  <h4>Carrera: <%=curso.getIdcarrera()%></h4>
+  <h2 class="card-header text-center font-weight-bold text-uppercase py-4">REPORTE DEL CURSO : <%=curso.getNombre()%></h2>
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4"><%=curso.getDescripcion()%></h3>	
   <br>
+  <%		ArrayList<Integer> anios=(ArrayList<Integer>)request.getAttribute("anios");
+  			for(Integer anio:anios)
+  				{
+  %>
   <table>
   <thead>
   <tr>
-  <th><p>Identificador:<%=curso.getIdentificador()%></p></th>
-  <th><p class="p2">Cupo Maximo:<%=curso.getCupomaximo()%></p></th>
-  <th><p class="p3">Año:<%=curso.getAnio()%></p></th>
+  <th><p >Cupo Maximo:<b><%=curso.getCupomaximo()%><b></b></p></th>
+  <th><p class="p2">Año:<b><%=anio+1900%></b></p></th>
   </tr>
   </thead>
   </table>
@@ -54,6 +61,7 @@ p.p1{
         <th>TIPO D.</th>
         <th>NUM D.</th>
       	<th>FECHA NAC.</th>
+      	<th>FECHA INSCRIPCION</th>
       </tr>
     </thead> 
     <tbody>
@@ -61,6 +69,8 @@ p.p1{
       	ArrayList<InscripcionCurso> ic=(ArrayList<InscripcionCurso>)request.getAttribute("inscripcionescurso"); 
        	for(InscripcionCurso insc:ic)
        	{
+      			if(insc.getFechainscripcion().getYear()==anio)
+      			{
       %>
       <tr>
         <td><%=insc.getAlumno().getIdentificador()%></td>
@@ -72,9 +82,10 @@ p.p1{
         <td><%=insc.getAlumno().getNumerodocumento()%></td>
         <td><%=insc.getAlumno().getFechanacimiento()%></td> 
         <td><%=insc.getFechainscripcion()%></td>
-        </tr><%}%>
+        </tr><%}}%>
     </tbody>
   </table>
+  <%}%>
   </div>
 </div>
 

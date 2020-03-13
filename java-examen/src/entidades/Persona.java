@@ -25,7 +25,7 @@ public class Persona {
 
 	public enum TipoDocumento{
 		dni,
-		libretacivica
+		lc;
 	}
 
 
