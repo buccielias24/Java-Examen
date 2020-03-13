@@ -34,11 +34,13 @@ public class inscripcionescursos extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		try{
 		ControladorPersona cp=new ControladorPersona();
 		DataCurso dc=new DataCurso();
 		Curso c=new Curso();
 		ArrayList<InscripcionCurso> ic=new ArrayList<InscripcionCurso>();
-		int id=Integer.parseInt(request.getParameter("id"));	
+		int id=0;
+		id=Integer.parseInt(request.getParameter("id"));	
 		c=dc.getById(id);
 		ArrayList<Integer> anios=cp.getAnios(c);
 		for(InscripcionCurso icu:dc.getInscripciones())
@@ -52,6 +54,8 @@ public class inscripcionescursos extends HttpServlet {
 		request.setAttribute("inscripcionescurso", ic);
 		request.setAttribute("detallecurso", c);
 		request.getRequestDispatcher("/ReporteCurso.jsp").forward(request, response);		
+		}catch(Exception e) {
+			response.sendRedirect("NotFound.jsp");}
 	}
 
 	/**
