@@ -49,6 +49,7 @@ public class editaralumno extends HttpServlet {
 		TipoDocumento tipodoc=TipoDocumento.valueOf(request.getParameter("tipodoc"));
 		int numdoc=Integer.parseInt(request.getParameter("nrodoc"));
 		Date fechanac=null;
+		int legajo=Integer.parseInt(request.getParameter("legajo"));
 		int id=Integer.parseInt(request.getParameter("identificador"));
 		try {
 			fechanac=new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechanac"));
@@ -64,6 +65,7 @@ public class editaralumno extends HttpServlet {
 		a.setTipodocumento(tipodoc);
 		a.setNumerodocumento(numdoc);
 		a.setFechanacimiento(fechanac);
+		a.setLegajo(legajo);
 		if(ctrl.edit(a))
 		{
 			response.setContentType("text/plain");

@@ -14,6 +14,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Autogestion</title>
+<link rel="stylesheet" href="css/estilo.css">
+<style>
+body {
+    font-family: 'Roboto';font-size: 16px;
+}
+</style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -37,7 +43,6 @@ $(document).ready(function(){
         });   
 });
 </script>
-
 </head>
 <body>
 		

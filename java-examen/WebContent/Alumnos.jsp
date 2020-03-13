@@ -17,7 +17,6 @@
 		<script type="text/javascript">
 		$(document).on("submit", "#myform", function(event) {
 		    var $form = $(this);
-
 		    $.post($form.attr("action"), $form.serialize(), function(responseText) {
 		        alert(responseText);
 		    });
@@ -28,7 +27,6 @@
 		</script>
 		
 		<script>
-
 $(document).ready(function(){
 	  $(".thehide").hide();
 	  $(document).on("click", "table button", function(){
@@ -37,7 +35,8 @@ $(document).ready(function(){
 	    $("#myModal2 .modal-body").html($("#partial_container").html());
 	    $('#myModal2 input[name="apellido"]').val($(this).closest("tr").find("td:nth-child(1)").text());
 	    $('#myModal2 input[name="nombre"]').val($(this).closest("tr").find("td:nth-child(2)").text());
-	    $('#myModal2 input[name="tipodoc"]').val($(this).closest("tr").find("td:nth-child(4)").text());    
+	    $('#myModal2 input[name="legajo"]').val($(this).closest("tr").find("td:nth-child(3)").text());
+	    $('#myModal2 select[name="tipodoc"]').val($(this).closest("tr").find("td:nth-child(4)").text());    
 	    $('#myModal2 input[name="nrodoc"]').val($(this).closest("tr").find("td:nth-child(5)").text()); 
 	    $('#myModal2 input[name="fechanac"]').val($(this).closest("tr").find("td:nth-child(6)").text()); 
 	    $('#myModal2 input[name="identificador"]').val($(this).closest("tr").find("td:nth-child(7)").text());
@@ -50,7 +49,6 @@ $(document).ready(function(){
 <script type="text/javascript">
 		$(document).on("submit", "#myform2", function(event) {
 		    var $form = $(this);
-
 		    $.post($form.attr("action"), $form.serialize(), function(responseText) {
 		        alert(responseText);
 		    });
@@ -59,7 +57,12 @@ $(document).ready(function(){
 		    
 		});
 		</script>
-
+<link rel="stylesheet" href="css/estilo.css">
+<style>
+body {
+    font-family: 'Roboto';font-size: 16px;
+}
+</style>
 </head>
 <body>
 <div class="container">
@@ -87,7 +90,7 @@ $(document).ready(function(){
 				<label><b>Tipo Doc</b></label>
    				<select id="tipodoc" name="tipodoc">
     			<option value="dni" selected>DNI</option>
-    			<option value="libci">Libreta Civica</option>
+    			<option value="lc">Libreta Civica</option>
     			</select>
 				<label><b>Numero Documento</b></label>
    				<input type="number" placeholder="numero documento" name="documento" required>
@@ -199,7 +202,10 @@ $(document).ready(function(){
           <div class="col-sm-12">
             <div class="form-group">
               <label>TIPO DOC:</label>
-              <input type="text" name="tipodoc" class="form-control" />
+               <select id="tipodoc" name="tipodoc">
+    			<option value="dni">DNI</option>
+    			<option value="lc">Libreta Civica</option>
+    		</select>	
             </div>
           </div>
           <div class="col-sm-12">
@@ -211,7 +217,13 @@ $(document).ready(function(){
           <div class="col-sm-12">
             <div class="form-group">
               <label>FECHA NAC:</label>
-              <input type="text" name="fechanac" class="form-control" />
+              <input type="date" name="fechanac" class="form-control" />
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label>LEGAJO:</label>
+              <input type="text" name="legajo" class="form-control" />
             </div>
           </div>
           <input type="hidden" name="identificador" class="form-control">

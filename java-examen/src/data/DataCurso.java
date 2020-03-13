@@ -108,14 +108,47 @@ public class DataCurso {
 		return insc_cursos;
 	}
 	
+	public ArrayList<InscripcionCurso> getInscripcionesAlumno(int ID){
+		DataAlumno da=new DataAlumno();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		ArrayList<InscripcionCurso> insc_cursos= new ArrayList<>();		
+		try {
+			stmt= Conectar.getInstancia().getConn().
+					prepareStatement("select * from inscripciones_curso where idalumno =?");
+				stmt.setInt(1,ID);
+				rs=stmt.executeQuery();
+			if(rs!=null) {
+				while(rs.next()) {
+					InscripcionCurso ic=new InscripcionCurso();
+					ic.setFechainscripcion(rs.getDate("fechainscripcion"));
+					ic.setCurso(this.getById(rs.getInt("idcurso")));
+					ic.setAlumno(da.getById(rs.getInt("idalumno")));
+					ic.setNota(rs.getDouble("nota"));;
+					insc_cursos.add(ic);
+				}
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();			
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				Conectar.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();}
+		}		
+		return insc_cursos;
+	}
+	
 	public ArrayList<Curso> getDisponibles(int ID){
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		ArrayList<Curso> cursos= new ArrayList<>();		
 		try {
 			stmt= Conectar.getInstancia().getConn().
-					prepareStatement("select * from curso where identificador not in (select idcurso from inscripciones_curso where idalumno=? and nota>6)" + 
-							"and curso.anio=(SELECT extract( year FROM CURRENT_DATE )::int)");
+					prepareStatement("select * from curso where identificador not in (select distinct(idcurso)"+ 
+			"from inscripciones_curso where idalumno=? and (nota>6 or date_part('year',fechainscripcion)=date_part('year',now())))");
 				stmt.setInt(1,ID);
 				rs=stmt.executeQuery();
 			if(rs!=null) {

@@ -6,11 +6,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="css/estilo.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+  <link rel="stylesheet" href="css/estilo.css">
+	
 <style type="text/css">
 p.p2 {
   position: relative;
@@ -19,9 +21,10 @@ p.p2 {
 p.p1{
   position:relative;
   left:200px;
+body {
+    font-family: 'Roboto';font-size: 50px;
 }
 </style>
-
 </head>
 <body>
 <% 
@@ -32,12 +35,18 @@ p.p1{
   <h3><%=curso.getDescripcion()%></h3>	
   <h4>Carrera: <%=curso.getIdcarrera()%></h4>
   <br>
+  <%		ArrayList<Integer> anios=(ArrayList<Integer>)request.getAttribute("anios");
+  			for(Integer anio:anios)
+  				{
+  				System.out.println(anio);
+  				
+  %>
   <table>
   <thead>
   <tr>
   <th><p>Identificador:<%=curso.getIdentificador()%></p></th>
   <th><p class="p2">Cupo Maximo:<%=curso.getCupomaximo()%></p></th>
-  <th><p class="p3">Año:<%=curso.getAnio()%></p></th>
+  <th><p class="p3">Año:<%=anio+1900%></p></th>
   </tr>
   </thead>
   </table>
@@ -61,6 +70,8 @@ p.p1{
       	ArrayList<InscripcionCurso> ic=(ArrayList<InscripcionCurso>)request.getAttribute("inscripcionescurso"); 
        	for(InscripcionCurso insc:ic)
        	{
+      			if(insc.getFechainscripcion().getYear()==anio)
+      			{
       %>
       <tr>
         <td><%=insc.getAlumno().getIdentificador()%></td>
@@ -72,9 +83,10 @@ p.p1{
         <td><%=insc.getAlumno().getNumerodocumento()%></td>
         <td><%=insc.getAlumno().getFechanacimiento()%></td> 
         <td><%=insc.getFechainscripcion()%></td>
-        </tr><%}%>
+        </tr><%}}%>
     </tbody>
   </table>
+  <%}%>
   </div>
 </div>
 

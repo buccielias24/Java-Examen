@@ -11,28 +11,33 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Cursos</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/estilo.css">
+<style>
+body {
+    font-family: 'Roboto';font-size: 22px;
+}
+</style>
 </head>
 <body>
-
-
-<table class="table table-hover">
+<div class="container">
+<h3 class="card-header text-center font-weight-bold text-uppercase py-4"><b>CURSOS ACTUALES</b></h3>
+<table class="table table-hover table-bordered table-responsive-md text-center">
   <thead>
     <tr>
-      <th class="text_align_center text_transform_uppercase">Nombre</th>
-      <th class="text_align_center text_transform_uppercase">Descipcion</th>
-      <th class="text_align_center text_transform_uppercase">Cupo Maximo</th>
-      <th class="text_align_center text_transform_uppercase">Año</th>
-      <th class="text_align_center text_transform_uppercase">Docente</th>
-      <th class="text_align_center text_transform_uppercase">Mas info</th> 
-      
-      <th></th>
+      <th class="text-center">Nombre</th>
+      <th class="text-center">Descipcion</th>
+      <th class="text-center">Cupo</th>
+      <th class="text-center">Año</th>
+      <th class="text-center">Docente</th>
+      <th class="text-center">info</th> 
     </tr>
   </thead>
-   <tbody>
+   <tbody> 
             <%DataCurso dc=new DataCurso();
               DataPersona dp=new DataPersona();
  		 ArrayList<Curso> cursos=dc.getAll();
@@ -51,5 +56,7 @@
     </tr><%}%>
   </tbody>
 </table>
+<!-- Table -->
+</div>
 </body>
 </html>

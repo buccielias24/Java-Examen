@@ -1,7 +1,14 @@
 package logic;
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import data.*;
 import entidades.*;
+import servlet.inscripcionescursos;
 public class ControladorPersona {
 
 	private DataPersona dp;
@@ -46,7 +53,7 @@ public class ControladorPersona {
 		if(igual==false)
 		{	dp.editar(a);
 			da.editar(a);
-			return true;
+			return true; 
 		}
 		else
 		{
@@ -87,7 +94,7 @@ public class ControladorPersona {
 
 	public boolean addCurso(int ID, Alumno a)
 	{	
-		if(this.validarInscripcion(dcu.getById(ID)))
+		if(this.validarNuevaInscripcion(dcu.getById(ID),a))
 		{
 			dcu.addInscripcion(dcu.getById(ID),a);
 			return true;
@@ -127,14 +134,16 @@ public class ControladorPersona {
 	//promedio de todos los cursos realizados por el alumno para una carrera
 			int contador=0;
 			double total=0;		
+			int anioactual=Year.now().getValue();
 			for(InscripcionCurso ic: this.getInscripcionesCurso(ID))
 				{
 				   if(ic.getAlumno().getIdentificador()==ID && ic.getCurso().getIdcarrera()==idcarrera)
 						{
-					   	 	
-					   			total=total+ic.getNota();   
+					      // se calcula el promedio de las materias cuya inscripcion sean anteriores al anio actual
+					   	 	if(ic.getFechainscripcion().getYear()+1900<anioactual)
+					   			{total=total+ic.getNota();   
 					   			contador++;	
-					   					
+					   			}			
 						}
 				}
 			return total/contador;
@@ -158,13 +167,66 @@ public class ControladorPersona {
 		return dcu.getDisponibles(ID);
 	}
 	
-	public boolean validarInscripcion(Curso c)
+	public boolean validarNuevaInscripcion(Curso c, Alumno a)
+	{
+		boolean validar=false;
+		
+		if(this.existeInscripcion(c, a))
+		{
+			if(this.validarCupo(c))
+			{
+				validar=true;
+			}
+		}
+		System.out.println("Validar general: "+validar);
+		return validar;
+	}
+	
+	public boolean existeInscripcion(Curso c, Alumno a)
+	{
+		boolean validar=true;
+		Date ahora=new Date();
+		
+		for(InscripcionCurso ins_c:dcu.getInscripcionesAlumno(a.getIdentificador()))
+		{
+				System.out.println("comparacion de fechas"+ins_c.getFechainscripcion().getYear()+ahora.getYear());
+				
+				if(ins_c.getCurso().getIdentificador()==c.getIdentificador() && ins_c.getFechainscripcion().getYear()==ahora.getYear())
+				{
+					
+					validar=false;
+				}
+		}
+		
+		System.out.println("validarInscripcion (FECHAS) retorna: "+validar);
+		return validar;
+	}
+	
+	public ArrayList<Integer> getAnios(Curso c)
+	{
+		ArrayList<Integer> anios=new ArrayList<Integer>();
+		for(InscripcionCurso ic:dcu.getInscripciones())
+		{
+			if (ic.getCurso().getIdentificador()==c.getIdentificador())
+			{
+				anios.add(ic.getFechainscripcion().getYear());
+			}
+		}
+		Set<Integer> hashSet = new HashSet<Integer>(anios);
+        anios.clear();
+        anios.addAll(hashSet);
+        Collections.sort(anios);
+		return anios;
+	}
+	
+	public boolean validarCupo(Curso c)
 	{
 		boolean validar=true;
 		int total=0;
+		Date anioactual=new Date();
 		for(InscripcionCurso ins_c:dcu.getInscripciones())			
 		{
-			if(ins_c.getCurso().getIdentificador()==c.getIdentificador())
+			if(ins_c.getCurso().getIdentificador()==c.getIdentificador() && anioactual.getYear()==ins_c.getFechainscripcion().getYear())
 			{
 				total++;
 			}
@@ -173,6 +235,7 @@ public class ControladorPersona {
 		{
 			validar=false;
 		}
+		System.out.println("validarCupo retorna :"+validar);
 		return validar;
 	}
 }
